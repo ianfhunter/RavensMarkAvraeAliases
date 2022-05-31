@@ -1,0 +1,58 @@
+embed 
+-title "Loot Calculation for DMs"{{d_args=&ARGS&}}
+
+{{TotalXP=int("%1%")}}
+<drac2>
+DMLvL=get('level', 0)
+DMLimits=[0,75, 150, 450, 950, 1875, 2250, 3500, 4000, 5250, 3750, 5000,5000,6250,7500,7500,10000,10000,12500,12500,12500]
+HalfProf= [0,1,1,1,1,1.5,1.5,1.5,1.5,2,2,2,2,2.5,2.5,2.5,2.5,3,3,3,3]
+DMod= [0.5, 0.75, 1]
+GPMod = [0,0.1,0.1,0.1,0.1,0.25,0.25,0.25,0.25,0.55,0.55,0.55,0.55,0.8,0.8,0.8,0.8,1.05,1.05,1.05,1.05]
+
+NParty = sum([ 1 if i != 0 else 0 for i, x in enumerate(d_args) ])
+PArr = [ int(x) for i, x in enumerate(d_args)  if i != 0  ]
+XPArr = [ TotalXP // int(NParty) for i, x in enumerate(d_args)  if i != 0  ]
+LSum = sum([ int(x) if i != 0 else 0 for i, x in enumerate(d_args) ])
+LText = [ int(x)  for i, x in enumerate(d_args) if i != 0 ]
+APL=round(LSum/NParty, 2)
+
+TotalXP = int(TotalXP)
+
+NewGP_A = [ int(XPArr[i] / HalfProf[x] * DMod[0] * GPMod[x]) for i, x in enumerate(PArr) ]
+NewGP_B = [ int(XPArr[i] / HalfProf[x] * DMod[1] * GPMod[x]) for  i, x in enumerate(PArr) ]
+NewGP_C = [ int(XPArr[i] / HalfProf[x] * DMod[2] * GPMod[x]) for  i, x in enumerate(PArr) ]
+
+ItemLoot = sum(NewGP_C )
+rank = sum([ ceil(int(x)/4) if i != 0 else 0 for i, x in enumerate(d_args) ])/NParty
+DMXP = int(DMLimits[DMLvL] * (1/(7-rank))) 
+# DMXP = 5* round(DMXP /5)
+DMGP = int(DMXP  / HalfProf[DMLvL] * DMod[2] * GPMod[DMLvL])
+# DMGP = 5* round(DMGP /5)
+</drac2>
+
+-desc "**__Party Make-up__**
+{{NParty}} Players {{LText}} (Avg: {{APL}})
+**Total Adjusted XP:** {{TotalXP}}
+
+**__Experience__**
+*Make sure you use Total Adjusted Experience for this calculator so gold is calculated correctly. When awarding XP use the **non-adjusted** value. If you ran a full quest, you are free to award bonus XP at your discretion.*
+
+**__Loot__**
+*Adjust gold based on how the session went:*
+**Quick/Low-Interaction:** {{NewGP_A}}
+**Standard:** {{NewGP_B}}
+**Lore/High-Interaction:** {{NewGP_C}}
+
+**__Allocations__**
+**Graveyard:** No Gold, no items
+**Hunt:** Gold as advised, no items.
+**Quest:** Gold as advised. **{{ItemLoot}} worth of items to split.**
+
+**__DM Rewards__**
+*Based on your current player level ({{DMLvL}})*
+**DMXP:** {{DMXP}}xp
+**DMGP:** {{DMGP}}gp
+"
+-color <color>
+-thumb https://www.aidedd.org/dnd/images/raven.jpg
+-footer "Usage: !boopsum [Total XP (adjusted)] [playerLevel] [playerLevel]..."
