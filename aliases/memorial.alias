@@ -1,0 +1,58 @@
+embed -title "Raven's Mark Memorial Board"
+
+<drac2>
+  # Name. They <Something>
+deaths = {
+  "alli": "were run through by a Chasme",
+  "astrid": "were disintegrated by the black dragon Cessirith, the Bane of the Bog",
+  "avalanche": "died from circumstances boop can't remember right now",
+  "baranno": "were slain by magical monstrosities in an archmage's lab, and another time were devoured by a kraken",
+  "bell": "were clawed to death by a flying horror",
+  "dazzle": "left on a hunt and never returned",
+  "dabura":  "left on a hunt and never returned",
+  "damascus":  "fought Ixdhor, a Morkoth, but their head exploded",
+  "dove": "fell down a hole and were struck by shadows",
+  "dunn": "were sucked into an Astral rift created by their own hand",
+  "ezra": "were petrified and disintegrated by an arcane defense system",
+  "faradan": "were disintegrated by a high priest of Orcus",
+  "faylene": "were eaten by a gelatinous cube",
+  "gobbledygooker":"were disintegrated by a powerful mage",
+  "gwen":"were killed by a hag's scarecrow",
+  "kaiba":"were disintegrated by throwing a stone at a door",
+  "katharine":  "left on a hunt and never returned",
+  "kovarro":  "charged back to save their companion from a dragonette",
+  "kapoor": "had their brains sucked out by a mind-flayer",
+  "kivea":  "were needled by creepy dolls",
+  "lupe": "were killed by a madcap",
+  "harrow": "died from an arrow wound from an ambush",
+  "ovahk": "were slain by a yeti while skiing",
+  "qanbus": "were killed in the death throes of a monstrous worm",
+  "raishan": "fell a long way and flubbed the landing",
+  "sagira": "were overrun by monstrous shark creatures",
+  "shivonne": "were killed by bugs",
+  "szofi": "were overrun by quicklings in the Feywild",
+  "vassago": "were crushed by an earth elemental while letting his companions escape",
+  "yasker": "had their brains sucked out by an Elder Oblex"
+}
+idx_lookup = list(deaths.keys())
+</drac2>
+{{search=str("%1%").lower()}}
+{{which = int(roll("1d"+str(len(deaths))))}}
+{{which = idx_lookup[which-1]}}
+{{which = which if search not in idx_lookup else search }}
+
+<drac2>
+if search.lower() == "list":
+    msg = idx_lookup
+else:
+    msg = "In memory of "+which.capitalize()+". They " + deaths[which] + "."
+    if search[0] != "%" and search != which:
+        msg = "Memorial not found. '" + search + "'" 
+</drac2>
+-desc "{{msg}}
+
+*Character may or may not still be deceased*
+"
+-color <color>
+-image "https://geeksofdoom.com/GoD/img/2014/04/braveheart-sword-e1397168232706.jpg"
+-footer "!memorial [name]. use '!memorial list' to get all available names. Written by Boop#3128."
