@@ -1,0 +1,26 @@
+embed 
+-title "Swapping Characters: Calculator"
+
+{{larg="%1%"}}
+{{PlayerLevel=get('level', 0) if not larg.isdigit() else int(larg)}}
+
+<drac2>
+BadInfo = int(PlayerLevel) == 0
+SwapLvl=[0,0,0,90,270,650,1900,3400,5232,7564,11964,17738,21862,27362,33762,41762,51362,60962,74962,88962,106462]
+applicable_gold = SwapLvl[PlayerLevel] // 2
+</drac2>
+
+-desc "**Raven's Mark Character Swap Rules for Level {{PlayerLevel}}**
+
+See [the Wiki](https://ravensmark.fandom.com/wiki/Changing_Characters) for more information on swapping characters.
+If you wish to edit your existing character, see [the Wikipage for Mulligans](https://ravensmark.fandom.com/wiki/Mulligans)
+
+- Starting Equipment
+- Starting Gold
+- {{applicable_gold}} gp
+
+**Note:** Repeated swapping of characters without much time between may result in a level-based restriction being placed on you.
+"
+-color <color>
+-thumb https://www.aidedd.org/dnd/images/raven.jpg
+-footer "Usage: !swapgold [playerLevel]  - written by Mella#0420 & Boop#3128"
