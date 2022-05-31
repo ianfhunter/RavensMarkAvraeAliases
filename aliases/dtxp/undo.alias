@@ -1,0 +1,41 @@
+embed
+
+{{timestamp=int((int(time()) - 1640995200)/60) }}
+
+-title "Downtime Eligibility"
+
+<drac2>
+xplog = load_yaml(character().cvars.get("xplog","{}"))   
+
+rates=[0,0,30, 90, 190, 375, 450, 550, 700, 800, 1050, 750, 1000,1000,1250,1500,1500,2000,2000,2500,0]
+
+dt_xp = rates[level]
+dt_gp = level*level
+
+# XP LOG
+xplog[timestamp] =  f"{dt_xp} Downtime Experience (via `!dtxp claim)`"
+character().set_cvar('xplog', dump_yaml(xplog))
+
+# XP
+exp = character().cvars.get("xp")
+exp = float(exp) - float(dt_xp)
+character().set_cvar("xp", str(exp))
+
+# # Bags
+bags = load_json(character().cvars.get("bags", "{}"))
+for b in bags:
+    if b[0] == "Coin Pouch":
+        b[1]["gp"] -= dt_gp
+
+character().set_cvar('bags', dump_json(bags))
+
+
+</drac2>
+
+-desc "
+This command undoes the effects of claiming downtime xp and gp.
+
+This command has removed **{{dt_xp}}** xp and **{{dt_gp}}** gp.
+"
+-footer "!dtxp claim. Written by Boop#3128"
+-color <color> -thumb https://i.imgur.com/uODsChU.png
