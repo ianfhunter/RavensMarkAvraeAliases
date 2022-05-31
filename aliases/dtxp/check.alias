@@ -1,0 +1,52 @@
+embed
+
+{{timestamp=int(time()) }}
+
+-title "Downtime Eligibility"
+
+<drac2>
+xplog = load_yaml(character().cvars.get("xplog","{}"))   
+
+rates=[0,0,30, 90, 190, 375, 450, 550, 700, 800, 1050, 750, 1000,1000,1250,1500,1500,2000,2000,2500,0]
+
+dt_xp = rates[level]
+dt_gp = level*level
+
+# XP LOG
+yesterday = timestamp - 1*24*(60*60)
+last_week = yesterday - 7*24*(60*60)
+if len(xplog) == 0:
+    last_xp_log = "Never."
+else:
+    last_xp_log = list(xplog.keys())[-1]
+    last_xp_log = last_xp_log*60 +1640995200
+# XP
+exp = character().cvars.get("xp")
+exp = float(exp) + float(dt_xp)
+
+# # Bags
+
+</drac2>
+
+
+-desc "
+If, over the last 7 days, you have not participated in:
+- A Quest
+- Graveyard
+- Hunt
+- Any other significant activity
+
+You can claim **{{dt_xp}}** xp and **{{dt_gp}}** gp. (Apply it with `!dtxp claim`)
+
+**You must participate in an RP scene during this period to redeem.**
+
+You cannot claim downtime rewards until the last day of the range is complete.
+If you are claiming experience for yesterday ( {{"<t:" + yesterday + ":d>"}} ), the start date for consideration is **{{"<t:" + last_week + ":d>"}}**. 
+
+__**Checking eligibility:**__
+- The last time you added to the xp tracker was **{{"<t:" + last_xp_log + ":d>"}}**.
+- Check the date of your last quest in #xp_and_loot
+- Check the date of your last dtxp claim in #player-economics
+"
+-footer "!dtxp check. Written by Boop#3128"
+-color <color> -thumb https://i.imgur.com/uODsChU.png
