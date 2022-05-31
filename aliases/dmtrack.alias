@@ -1,0 +1,53 @@
+embed
+
+<drac2>
+args = &ARGS&
+if not args:
+    add_dtxp = 0
+else:
+    add_dtxp = int(args[0])
+lvl= get("level")
+limits=[0, 75, 150, 450, 950, 1875, 2250, 2750, 3500, 4000, 5250, 3750, 5000, 5000, 6250, 7500, 7500, 10000, 10000, 12500]
+limit = limits[int(lvl)]
+me = character()
+ExtraMSG = ""
+
+if me.cc_exists("dtxp"):
+    current_dtxp = me.get_cc("dtxp")
+    current_level = me.get_cc("dtxp_level")
+    if (current_level != lvl):
+        ExtraMSG = "You have recently levelled up. DMXP has been reset"
+        me.set_cc("dtxp_level", lvl)
+        me.set_cc("dtxp", 0)
+        
+else:
+    me.create_cc("dtxp", 0, limit)
+    me.create_cc("dtxp_level", 0, 20)
+    me.set_cc("dtxp", 0)
+    me.set_cc("dtxp_level", lvl)
+
+new_dtxp = me.get_cc("dtxp") + add_dtxp
+if new_dtxp > limit:
+    new_dtxp = limit
+difference_dtxp = new_dtxp - me.get_cc("dtxp")
+me.set_cc("dtxp", new_dtxp)
+
+
+
+</drac2>
+
+-title "Downtime XP/Income"
+
+-desc "
+You are level {{lvl}}. 
+Your DMXP Limit for this level is: {{limit}}. 
+There is no DMGP limit at present.
+
+**DMXP**: {{new_dtxp}}(+{{difference_dtxp}}) / {{limit}}
+
+Don't forget to add your new xp to your character! `!xp {{difference_dtxp}}`
+{{ExtraMSG}}"
+
+-footer "**Usage:** `!dmtrack [xp (from !boopsum)]`. Written by Boop#3128."
+
+-color <color> -thumb https://i.imgur.com/uODsChU.png
