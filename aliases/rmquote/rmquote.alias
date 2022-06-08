@@ -3,7 +3,6 @@ embed
 <drac2>
 # To add more images, simply add direct image links to this list
 images = """
-
 https://cdn.discordapp.com/attachments/705076615335378974/849297410685796403/Screenshot_20210601-094437_Discord.jpg
 https://cdn.discordapp.com/attachments/705076615335378974/849093835929157662/Screenshot_20210531-211516_Discord.jpg
 https://cdn.discordapp.com/attachments/705076615335378974/811029073814880256/unknown.png
