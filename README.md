@@ -19,5 +19,4 @@ You can use a real editor and upload directly from VSCode with [this plugin](htt
 That's it!
 
 Please put a comment indicating what time range you have added quotes from! The current quotes are from:
-- Until 2 June 2021
-- 1 Jan 22 - 8 June 2022
+- Until 6 Aug 2023
