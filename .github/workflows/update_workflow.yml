@@ -1,5 +1,6 @@
 name: Update Avrae Collections
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
