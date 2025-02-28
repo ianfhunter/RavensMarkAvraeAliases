@@ -11,6 +11,7 @@ images = get_gvar(gvar_list[index_of_random_gvar])
 
 # Now that we have a list of images, we randomly select a image from that list.
 quotes = images.split("\n")
+quotes = [item for item in quotes if item]  # Remove empty values
 rand_roll = int(roll("1d"+str(len(quotes)))) - 1
 quote = quotes[rand_roll]
 </drac2>
@@ -19,6 +20,6 @@ quote = quotes[rand_roll]
 
 -image {{quote }}
 
--footer "!rmquote by Boop. To report issues with images, use reference #{{rand_roll}}."
+-footer "!rmquote by Boop. To report issues with images, use reference #G{{index_of_random_gvar}}I{{rand_roll}}."
 
 -color <color> -thumb https://cdn.discordapp.com/icons/476444691643236352/4b1927846c25ed68ba946f157dfe598f.jpg
