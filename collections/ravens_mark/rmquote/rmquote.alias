@@ -3,7 +3,8 @@ embed
 <drac2>
 # Our images are contained within GVARs. But we have too many so we need multiple
 gvar_list = [
-  "befedcb6-ee27-4853-a597-71b6dece2bf4"
+  "befedcb6-ee27-4853-a597-71b6dece2bf4",
+  "8f03ab9a-2ae0-4989-9ef0-5bfc91b2380f"
 ]
 index_of_random_gvar = int(roll("1d"+str(len(gvar_list)))) - 1
 images = get_gvar(gvar_list[index_of_random_gvar])
