@@ -14,12 +14,14 @@ quotes = images.split("\n")
 quotes = [item for item in quotes if item]  # Remove empty values
 rand_roll = int(roll("1d"+str(len(quotes)))) - 1
 quote = quotes[rand_roll]
+
+last_few_characters = quote[-20:-4]
 </drac2>
 
 -title "Avrae has a random Raven's Mark quote for you!"
 
 -image {{quote }}
 
--footer "!rmquote by Boop. To report issues with images, use reference #G{{index_of_random_gvar}}I{{rand_roll}}."
+-footer "!rmquote by Boop. To report issues with images, use reference #G{{index_of_random_gvar}}I{{rand_roll}}SS{{last_few_characters}}."
 
 -color <color> -thumb https://cdn.discordapp.com/icons/476444691643236352/4b1927846c25ed68ba946f157dfe598f.jpg
