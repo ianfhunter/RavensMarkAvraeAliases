@@ -1003,6 +1003,6 @@ quote = quotes[rand_roll]
 
 -image {{quote }}
 
--footer "!rmquote by Boop."
+-footer "!rmquote by Boop. To report issues with images, use reference #{{rand_roll}}"
 
 -color <color> -thumb https://cdn.discordapp.com/icons/476444691643236352/4b1927846c25ed68ba946f157dfe598f.jpg
