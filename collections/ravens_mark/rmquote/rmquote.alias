@@ -1,10 +1,14 @@
 embed 
 
 <drac2>
-# To add more images, simply add direct image links to this list
-images = get_gvar("befedcb6-ee27-4853-a597-71b6dece2bf4")
+# Our images are contained within GVARs. But we have too many so we need multiple
+gvar_list = [
+  "befedcb6-ee27-4853-a597-71b6dece2bf4"
+]
+index_of_random_gvar = int(roll("1d"+str(len(gvar_list)))) - 1
+images = get_gvar(gvar_list[index_of_random_gvar])
 
-# Now that we have a list of images (in gv), we randomly select a image from that list.
+# Now that we have a list of images, we randomly select a image from that list.
 quotes = images.split("\n")
 rand_roll = int(roll("1d"+str(len(quotes)))) - 1
 quote = quotes[rand_roll]
